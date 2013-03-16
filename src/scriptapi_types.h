@@ -27,12 +27,15 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include "irrlichttypes_bloated.h"
 #include "porting.h"
 #include "map.h"
+#include "util/multilang.h"
 
 extern "C" {
 #include <lua.h>
 }
 
 std::string        getstringfield_default        (lua_State *L, int table,
+                             const char *fieldname, const std::string &default_);
+MultiLangString    getmlsfield_default        (lua_State *L, int table,
                              const char *fieldname, const std::string &default_);
 bool               getboolfield_default(lua_State *L, int table,
                              const char *fieldname, bool default_);
@@ -43,6 +46,8 @@ int                getintfield_default           (lua_State *L, int table,
 
 bool               getstringfield(lua_State *L, int table,
                              const char *fieldname, std::string &result);
+bool               getmlsfield(lua_State *L, int table,
+                             const char *fieldname, MultiLangString &result);
 bool               getintfield(lua_State *L, int table,
                              const char *fieldname, int &result);
 void               read_groups                   (lua_State *L, int index,

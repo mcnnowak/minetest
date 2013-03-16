@@ -35,6 +35,18 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 #include "gettext.h"
 
+#include "util/multilang.h"
+#include "locale.h"
+// Returns stuff like "en", "fi", "de"
+static std::string get_locale_lang()
+{
+	char *c = setlocale(LC_MESSAGES, NULL);
+	if(c == NULL)
+		return MULTILANG_DEFAULT;
+	std::string lang(c);
+	return lang.substr(0,2);
+}
+
 void drawItemStack(video::IVideoDriver *driver,
 		gui::IGUIFont *font,
 		const ItemStack &item,
@@ -543,7 +555,8 @@ void GUIFormSpecMenu::regenerateGui(v2u32 screensize)
 			ItemStack item;
 			item.deSerialize(fimage, idef);
 			video::ITexture *texture = idef->getInventoryTexture(item.getDefinition(idef).name, m_gamedef);
-			std::string tooltip = item.getDefinition(idef).description;
+			std::string lang = get_locale_lang();
+			std::string tooltip = item.getDefinition(idef).description.get(lang);
 			flabel = unescape_string(flabel);
 			FieldSpec spec = FieldSpec(
 				narrow_to_wide(fname.c_str()),
@@ -724,8 +737,10 @@ void GUIFormSpecMenu::drawList(const ListDrawSpec &s, int phase)
 
 			// Draw tooltip
 			std::string tooltip_text = "";
-			if(hovering && !m_selected_item)
-				tooltip_text = item.getDefinition(m_gamedef->idef()).description;
+			if(hovering && !m_selected_item){
+				std::string lang = get_locale_lang();
+				tooltip_text = item.getDefinition(m_gamedef->idef()).description.get(lang);
+			}
 			if(tooltip_text != "")
 			{
 				m_tooltip_element->setVisible(true);

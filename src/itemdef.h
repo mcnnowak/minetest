@@ -26,6 +26,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include <iostream>
 #include <set>
 #include "itemgroup.h"
+#include "util/multilang.h"
 class IGameDef;
 struct ToolCapabilities;
 
@@ -48,7 +49,7 @@ struct ItemDefinition
 	*/
 	ItemType type;
 	std::string name; // "" = hand
-	std::string description; // Shown in tooltip.
+	MultiLangString description; // Shown in tooltip.
 
 	/*
 		Visual properties

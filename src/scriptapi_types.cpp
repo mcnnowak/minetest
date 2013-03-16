@@ -229,6 +229,36 @@ bool getstringfield(lua_State *L, int table,
 	return got;
 }
 
+bool getmlsfield(lua_State *L, int table,
+		const char *fieldname, MultiLangString &result)
+{
+	lua_getfield(L, table, fieldname);
+	bool got = false;
+	if(lua_isstring(L, -1)){
+		size_t len = 0;
+		const char *ptr = lua_tolstring(L, -1, &len);
+		result = std::string(ptr, len);
+		got = true;
+	}
+	else if(lua_istable(L, -1)){
+		int index = lua_gettop(L);
+		lua_pushnil(L);
+		while(lua_next(L, index) != 0){
+			// key at index -2 and value at index -1
+			if(lua_isstring(L, -2) && lua_isstring(L, -1)){
+				const char *lang = lua_tostring(L, -2);
+				const char *value = lua_tostring(L, -1);
+				result.set(lang, value);
+			}
+			// removes value, keeps key for next iteration
+			lua_pop(L, 1);
+		}
+		got = true;
+	}
+	lua_pop(L, 1);
+	return got;
+}
+
 bool getintfield(lua_State *L, int table,
 		const char *fieldname, int &result)
 {
@@ -282,6 +312,14 @@ std::string getstringfield_default(lua_State *L, int table,
 {
 	std::string result = default_;
 	getstringfield(L, table, fieldname, result);
+	return result;
+}
+
+MultiLangString getmlsfield_default(lua_State *L, int table,
+		const char *fieldname, const std::string &default_)
+{
+	MultiLangString result = default_;
+	getmlsfield(L, table, fieldname, result);
 	return result;
 }
 

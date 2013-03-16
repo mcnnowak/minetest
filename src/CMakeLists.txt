@@ -266,6 +266,7 @@ set(common_SRCS
 	util/pointedthing.cpp
 	util/string.cpp
 	util/timetaker.cpp
+	util/multilang.cpp
 )
 
 # This gives us the icon

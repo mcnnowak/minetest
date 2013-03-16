@@ -137,6 +137,9 @@ void ItemDefinition::serialize(std::ostream &os) const
 		writeS16(os, i->second);
 	}
 	os<<serializeString(node_placement_prediction);
+	// Stuff below should be moved to correct place in a version that otherwise changes
+	// the protocol version
+	os<<serializeMultiLangString(description);
 }
 
 void ItemDefinition::deSerialize(std::istream &is)
@@ -175,6 +178,7 @@ void ItemDefinition::deSerialize(std::istream &is)
 	// block to not need to increase the version.
 	try{
 		node_placement_prediction = deSerializeString(is);
+		description = deSerializeMultiLangString(is);
 	}catch(SerializationError &e) {};
 }
 

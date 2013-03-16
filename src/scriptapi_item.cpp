@@ -56,7 +56,7 @@ ItemDefinition read_item_definition(lua_State *L, int index,
 	def.type = (ItemType)getenumfield(L, index, "type",
 			es_ItemType, ITEM_NONE);
 	getstringfield(L, index, "name", def.name);
-	getstringfield(L, index, "description", def.description);
+	getmlsfield   (L, index, "description", def.description);
 	getstringfield(L, index, "inventory_image", def.inventory_image);
 	getstringfield(L, index, "wield_image", def.wield_image);
 
