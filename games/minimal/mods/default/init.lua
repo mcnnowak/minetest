@@ -44,7 +44,7 @@ minetest.register_item(":", {
 })
 
 minetest.register_tool("default:pick_wood", {
-	description = "Wooden Pickaxe",
+	description = {en="Wooden Pickaxe", fi="Puinen hakku"},
 	inventory_image = "default_tool_woodpick.png",
 	tool_capabilities = {
 		max_drop_level=0,
@@ -54,7 +54,7 @@ minetest.register_tool("default:pick_wood", {
 	},
 })
 minetest.register_tool("default:pick_stone", {
-	description = "Stone Pickaxe",
+	description = {en="Stone Pickaxe", fi="Kivinen hakku"},
 	inventory_image = "default_tool_stonepick.png",
 	tool_capabilities = {
 		max_drop_level=0,
@@ -64,7 +64,7 @@ minetest.register_tool("default:pick_stone", {
 	},
 })
 minetest.register_tool("default:pick_steel", {
-	description = "Steel Pickaxe",
+	description = {en="Steel Pickaxe", fi="Teräksinen hakku"},
 	inventory_image = "default_tool_steelpick.png",
 	tool_capabilities = {
 		max_drop_level=1,
@@ -74,7 +74,7 @@ minetest.register_tool("default:pick_steel", {
 	},
 })
 minetest.register_tool("default:pick_mese", {
-	description = "Mese Pickaxe",
+	description = {en="Mese Pickaxe", fi="Mesehakku"},
 	inventory_image = "default_tool_mesepick.png",
 	tool_capabilities = {
 		full_punch_interval = 1.0,
@@ -758,7 +758,7 @@ minetest.register_node("default:dirt_with_grass_footsteps", {
 })
 
 minetest.register_node("default:dirt", {
-	description = "Dirt",
+	description = {en="Dirt", fi="Multa"},
 	tiles ={"default_dirt.png"},
 	is_ground_content = true,
 	groups = {crumbly=3},
@@ -766,7 +766,7 @@ minetest.register_node("default:dirt", {
 })
 
 minetest.register_node("default:sand", {
-	description = "Sand",
+	description = {en="Sand", fi="Hiekka"},
 	tiles ={"default_sand.png"},
 	is_ground_content = true,
 	groups = {crumbly=3, falling_node=1},
@@ -774,7 +774,7 @@ minetest.register_node("default:sand", {
 })
 
 minetest.register_node("default:gravel", {
-	description = "Gravel",
+	description = {en="Gravel", fi="Sora"},
 	tiles ={"default_gravel.png"},
 	is_ground_content = true,
 	groups = {crumbly=2, falling_node=1},
@@ -867,7 +867,7 @@ minetest.register_node("default:leaves", {
 })
 
 minetest.register_node("default:cactus", {
-	description = "Cactus",
+	description = {en="Cactus", fi="Kaktus"},
 	tiles ={"default_cactus_top.png", "default_cactus_top.png", "default_cactus_side.png"},
 	is_ground_content = true,
 	groups = {snappy=2,choppy=3},
@@ -888,7 +888,7 @@ minetest.register_node("default:papyrus", {
 })
 
 minetest.register_node("default:bookshelf", {
-	description = "Bookshelf",
+	description = {en="Bookshelf", fi="Kirjahylly"},
 	tiles ={"default_wood.png", "default_wood.png", "default_bookshelf.png"},
 	is_ground_content = true,
 	groups = {snappy=2,choppy=3,oddly_breakable_by_hand=2},
@@ -896,7 +896,7 @@ minetest.register_node("default:bookshelf", {
 })
 
 minetest.register_node("default:glass", {
-	description = "Glass",
+	description = {en="Glass", fi="Lasi"},
 	drawtype = "glasslike",
 	tiles ={"default_glass.png"},
 	inventory_image = minetest.inventorycube("default_glass.png"),
@@ -908,7 +908,7 @@ minetest.register_node("default:glass", {
 })
 
 minetest.register_node("default:fence_wood", {
-	description = "Wooden Fence",
+	description = {en="Wooden Fence", fi="Puinen aita"},
 	drawtype = "fencelike",
 	tiles ={"default_wood.png"},
 	inventory_image = "default_fence.png",
@@ -924,7 +924,7 @@ minetest.register_node("default:fence_wood", {
 })
 
 minetest.register_node("default:rail", {
-	description = "Rail",
+	description = {en="Rail", fi="Raide"},
 	drawtype = "raillike",
 	tiles ={"default_rail.png", "default_rail_curved.png", "default_rail_t_junction.png", "default_rail_crossing.png"},
 	inventory_image = "default_rail.png",
@@ -940,7 +940,7 @@ minetest.register_node("default:rail", {
 })
 
 minetest.register_node("default:ladder", {
-	description = "Ladder",
+	description = {en="Ladder", fi="Tikapuut"},
 	drawtype = "signlike",
 	tiles ={"default_ladder.png"},
 	inventory_image = "default_ladder.png",
@@ -962,7 +962,7 @@ minetest.register_node("default:ladder", {
 })
 
 minetest.register_node("default:wood", {
-	description = "Wood",
+	description = {en="Wood", fi="Laudat"},
 	tiles ={"default_wood.png"},
 	is_ground_content = true,
 	groups = {snappy=2,choppy=2,oddly_breakable_by_hand=2},
@@ -1090,7 +1090,7 @@ minetest.register_node("default:lava_source", {
 })
 
 minetest.register_node("default:torch", {
-	description = "Torch",
+	description = {en="Torch", fi="Lyhty"},
 	drawtype = "torchlike",
 	tiles ={"default_torch_on_floor.png", "default_torch_on_ceiling.png", "default_torch.png"},
 	inventory_image = "default_torch_on_floor.png",
