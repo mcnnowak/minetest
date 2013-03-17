@@ -641,8 +641,8 @@ int ObjectRef::l_get_player_control(lua_State *L)
 	return 1;
 }
 
-// get_player_control_bits(self)
-int ObjectRef::l_get_player_control_bits(lua_State *L)
+// get_player_language(self)
+int ObjectRef::l_get_player_language(lua_State *L)
 {
 	ObjectRef *ref = checkobject(L, 1);
 	Player *player = getplayer(ref);
@@ -651,8 +651,13 @@ int ObjectRef::l_get_player_control_bits(lua_State *L)
 		return 1;
 	}
 	// Do it
-	lua_pushnumber(L, player->keyPressed);
+	lua_pushstring(L, player->language.c_str());
 	return 1;
+}
+
+// get_player_language(self) -> eg. "en"
+int ObjRef::l_get_player_language(lua_State *L)
+{
 }
 
 

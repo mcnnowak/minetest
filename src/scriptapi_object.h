@@ -181,6 +181,9 @@ private:
 	// get_player_control_bits(self)
 	static int l_get_player_control_bits(lua_State *L);
 
+	// get_player_language(self) -> eg. "en"
+	static int l_get_player_language(lua_State *L);
+
 public:
 	ObjectRef(ServerActiveObject *object);
 

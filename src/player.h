@@ -239,6 +239,8 @@ public:
 	
 	u32 keyPressed;
 
+	std::string language;
+
 protected:
 	IGameDef *m_gamedef;
 
