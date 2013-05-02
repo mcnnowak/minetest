@@ -541,6 +541,9 @@ public:
 	bool hudRemove(Player *player, u32 id);
 	bool hudChange(Player *player, u32 id, HudElementStat stat, void *value);
 	bool hudSetFlags(Player *player, u32 flags, u32 mask);
+
+	bool setSky(Player *player, const std::string &type,
+			const std::vector<std::string> &params);
 	
 private:
 
@@ -585,6 +588,8 @@ private:
 	void SendHUDRemove(u16 peer_id, u32 id);
 	void SendHUDChange(u16 peer_id, u32 id, HudElementStat stat, void *value);
 	void SendHUDSetFlags(u16 peer_id, u32 flags, u32 mask);
+	void SendSetSky(u16 peer_id, const std::string &type,
+			const std::vector<std::string> &params);
 	
 	/*
 		Send a node removal/addition event to all clients except ignore_id.

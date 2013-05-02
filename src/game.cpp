@@ -1084,6 +1084,8 @@ void the_game(
 
 	Sky *sky = NULL;
 	sky = new Sky(smgr->getRootSceneNode(), smgr, -1);
+
+	scene::ISceneNode* skybox = NULL;
 	
 	/*
 		FarMesh
@@ -2185,6 +2187,30 @@ void the_game(
 					
 					delete event.hudchange.v2fdata;
 					delete event.hudchange.sdata;
+				}
+				else if (event.type == CE_SET_SKY)
+				{
+					sky->setVisible(false);
+					if(skybox){
+						skybox->drop();
+						skybox = NULL;
+					}
+					if(*event.set_sky.type == "skybox" &&
+							event.set_sky.params->size() == 6){
+						skybox = smgr->addSkyBoxSceneNode(
+								tsrc->getTextureRaw((*event.set_sky.params)[0]),
+								tsrc->getTextureRaw((*event.set_sky.params)[1]),
+								tsrc->getTextureRaw((*event.set_sky.params)[2]),
+								tsrc->getTextureRaw((*event.set_sky.params)[3]),
+								tsrc->getTextureRaw((*event.set_sky.params)[4]),
+								tsrc->getTextureRaw((*event.set_sky.params)[5]));
+					}
+					if(*event.set_sky.type == "regular"){
+						sky->setVisible(true);
+					}
+
+					delete event.set_sky.type;
+					delete event.set_sky.params;
 				}
 			}
 		}

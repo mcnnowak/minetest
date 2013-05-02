@@ -3691,6 +3691,25 @@ void Server::SendHUDSetFlags(u16 peer_id, u32 flags, u32 mask)
 	m_con.Send(peer_id, 0, data, true);
 }
 
+void Server::SendSetSky(u16 peer_id, const std::string &type,
+		const std::vector<std::string> &params)
+{
+	std::ostringstream os(std::ios_base::binary);
+
+	// Write command
+	writeU16(os, TOCLIENT_SET_SKY);
+	os<<serializeString(type);
+	writeU16(os, params.size());
+	for(size_t i=0; i<params.size(); i++)
+		os<<serializeString(params[i]);
+
+	// Make data buffer
+	std::string s = os.str();
+	SharedBuffer<u8> data((u8 *)s.c_str(), s.size());
+	// Send as reliable
+	m_con.Send(peer_id, 0, data, true);
+}
+
 void Server::BroadcastChatMessage(const std::wstring &message)
 {
 	for(std::map<u16, RemoteClient*>::iterator
@@ -4685,6 +4704,16 @@ bool Server::hudSetFlags(Player *player, u32 flags, u32 mask) {
 		return false;
 
 	SendHUDSetFlags(player->peer_id, flags, mask);
+	return true;
+}
+
+bool Server::setSky(Player *player, const std::string &type,
+		const std::vector<std::string> &params)
+{
+	if (!player)
+		return false;
+
+	SendSetSky(player->peer_id, type, params);
 	return true;
 }
 

@@ -937,6 +937,38 @@ int ObjectRef::l_hud_set_flags(lua_State *L)
 	return 1;
 }
 
+// set_sky(self, type, list)
+int ObjectRef::l_set_sky(lua_State *L)
+{
+	ObjectRef *ref = checkobject(L, 1);
+	Player *player = getplayer(ref);
+	if (player == NULL)
+		return 0;
+
+	std::string type = luaL_checkstring(L, 2);
+
+	std::vector<std::string> params;
+	if (lua_istable(L, 3)) {
+		int table = lua_gettop(L);
+		lua_pushnil(L);
+		while (lua_next(L, table) != 0) {
+			// key at index -2 and value at index -1
+			if (lua_isstring(L, -1))
+				params.push_back(lua_tostring(L, -1));
+			else
+				params.push_back("");
+			// removes value, keeps key for next iteration
+			lua_pop(L, 1);
+		}
+	}
+
+	if (!get_server(L)->setSky(player, type, params))
+		return 0;
+
+	lua_pushboolean(L, true);
+	return 1;
+}
+
 ObjectRef::ObjectRef(ServerActiveObject *object):
 	m_object(object)
 {
@@ -1048,6 +1080,7 @@ const luaL_reg ObjectRef::methods[] = {
 	luamethod(ObjectRef, hud_change),
 	luamethod(ObjectRef, hud_get),
 	luamethod(ObjectRef, hud_set_flags),
+	luamethod(ObjectRef, set_sky),
 	{0,0}
 };
 

@@ -205,6 +205,9 @@ private:
 	// hud_set_flags(self, flags)
 	static int l_hud_set_flags(lua_State *L);
 
+	// set_sky(self, type, list)
+	static int l_set_sky(lua_State *L);
+
 public:
 	ObjectRef(ServerActiveObject *object);
 

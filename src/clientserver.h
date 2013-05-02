@@ -480,6 +480,17 @@ enum ToClientCommand
 		u32 flags
 		u32 mask
 	*/
+
+	TOCLIENT_SET_SKY = 0x4d,
+	/*
+		u16 command
+		u8 len
+		u8[len] type
+		u16 count
+		foreach count:
+			u8 len
+			u8[len] param
+	*/
 };
 
 enum ToServerCommand

@@ -58,10 +58,13 @@ public:
 	bool getCloudsVisible(){ return m_clouds_visible; }
 	video::SColorf getCloudColor(){ return m_cloudcolor_f; }
 
+	void setVisible(bool visible){ m_visible = visible; }
+
 private:
 	core::aabbox3d<f32> Box;
 	video::SMaterial m_materials[SKY_MATERIAL_COUNT];
-	
+
+	bool m_visible;
 	bool m_first_update;
 	float m_time_of_day;
 	float m_time_brightness;
